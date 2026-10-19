@@ -1,0 +1,6 @@
+.git
+.gitignore
+project.env
+scripts
+*.md
+**/__pycache__

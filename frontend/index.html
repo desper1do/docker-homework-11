@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>docker-homework-11</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    pre { background: #f2f2f2; padding: 12px; border-radius: 6px; overflow-x: auto; }
+    button { padding: 8px 14px; font-size: 15px; cursor: pointer; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1b1b1b; color: #eee; }
+      pre { background: #2a2a2a; }
+    }
+  </style>
+</head>
+<body>
+  <h1>docker-homework-11</h1>
+  <p>Персональный контейнерный стенд: frontend (nginx) &rarr; backend (Python) в пользовательской сети.</p>
+  <button id="btn">Запросить /api</button>
+  <pre id="out">Нажми кнопку, чтобы получить ответ backend.</pre>
+  <script>
+    document.getElementById('btn').addEventListener('click', async () => {
+      const out = document.getElementById('out');
+      out.textContent = 'Загрузка...';
+      try {
+        const r = await fetch('/api');
+        out.textContent = 'HTTP ' + r.status + '\n' + JSON.stringify(await r.json(), null, 2);
+      } catch (e) {
+        out.textContent = 'Ошибка: ' + e;
+      }
+    });
+  </script>
+</body>
+</html>
